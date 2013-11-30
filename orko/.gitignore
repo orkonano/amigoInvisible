@@ -1,0 +1,9 @@
+/.classpath
+/.project
+/orko.iml
+/orko-grailsPlugins.iml
+/.idea
+/.settings
+/target
+/target-eclipse
+/out
