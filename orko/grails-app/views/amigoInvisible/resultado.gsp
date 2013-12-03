@@ -9,11 +9,9 @@
 </head>
 
 <body>
-	<a href="#list-amigoInvisible" class="skip" tabindex="-1"><g:message
-			code="default.link.skip.label" default="Skip to content&hellip;" /></a>
 
 
-	<div>Revisen los emails</div>
+	<h3>Revisen los emails</h3>
 		
 </body>
 </html>

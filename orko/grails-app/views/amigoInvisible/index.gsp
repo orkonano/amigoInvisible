@@ -9,12 +9,7 @@
 <body>
 
 
-<div class="jumbotron">
-	<div class="container">
-	    <h1>Bienvenido al amigo invisible</h1>
-	</div>
-</div>
-<div class="containter">
+
 <g:form name="amigoInvisibleForm" url="[esource:amigoInvisibleCommandInstance ,controller:'amigoInvisible',action:'generarAmigoInvisible']">
     <table id="tablaAmigoInvisible" class="table table-striped">
         <thead>
@@ -62,7 +57,6 @@
 		<td><button type="button" class="btn btn-danger eliminarBoton"><span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar</button></td>
 	</tr>
 </script>
-</div>
 </body>
 
 </html>
