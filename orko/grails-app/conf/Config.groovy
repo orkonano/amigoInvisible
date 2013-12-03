@@ -118,8 +118,8 @@ grails {
 	mail {
 	  host = "smtp.gmail.com"
 	  port = 465
-	  username = "orquito@gmail.com"
-	  password = "orquito240384"
+	  username = "orkodevapp@gmail.com"
+	  password = "nano2403"
 	  props = ["mail.smtp.auth":"true",
 			   "mail.smtp.socketFactory.port":"465",
 			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
@@ -127,4 +127,4 @@ grails {
 	}
  }
 
-grails.mail.default.from = "orquito@gmail.com"
+grails.mail.default.from = "orkodevapp@gmail.com"
