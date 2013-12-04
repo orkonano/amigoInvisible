@@ -2,13 +2,14 @@ package orko
 
 class AmigoInvisible {
 
-    String nombre
-    String email
 
-    static constraints = {
-        nombre blank: false
-        email email: true, blank: false
-    }
+	String nombre
+	String email
+
+	static constraints = {
+		nombre blank: false
+		email email: true, blank: false
+	}
 
 	@Override
 	public int hashCode() {
@@ -32,6 +33,5 @@ class AmigoInvisible {
 		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
-	}	
-	
+	}
 }

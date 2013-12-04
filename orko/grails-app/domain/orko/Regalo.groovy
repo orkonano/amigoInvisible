@@ -6,6 +6,8 @@ class Regalo {
     AmigoInvisible amigoTo
 
     static constraints = {
-
-    }
+		amigoFrom validator: { val, obj ->
+			obj.amigoTo.nombre != val.nombre
+		}
+	}
 }

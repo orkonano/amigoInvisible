@@ -1,5 +1,6 @@
 package orko
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
@@ -16,9 +17,11 @@ class AmigoInvisibleSpec extends Specification {
     }
 
     void "los atributos no pueden ser null"() {
-        when "los atributos son nulos"
+		given:
+		mockForConstraintsTests AmigoInvisible
+        when: "los atributos son nulos"
         def amigo = new AmigoInvisible()
-        then "la validacion falla"
+        then: "la validacion falla"
         !amigo.validate()
         amigo.hasErrors()
         amigo.errors['nombre'] == 'nullable'
@@ -26,28 +29,34 @@ class AmigoInvisibleSpec extends Specification {
     }
 
     void "los atributos no pueden ser vacios"() {
-        when "los atributos son vacios"
+		given:
+		mockForConstraintsTests AmigoInvisible
+        when: "los atributos son vacios"
         def amigo = new AmigoInvisible(nombre: "",email: "")
-        then "la validacion falla"
+        then: "la validacion falla"
         !amigo.validate()
         amigo.hasErrors()
-        amigo.errors['nombre'] == 'blank'
-        amigo.errors['email'] == 'blank'
+        amigo.errors['nombre'] == 'nullable'
+        amigo.errors['email'] == 'nullable'
     }
 
     void "email sin formato de email"() {
-        when "el mail no tiene formato de email"
+		given:
+		mockForConstraintsTests AmigoInvisible
+        when: "el mail no tiene formato de email"
         def amigo = new AmigoInvisible(nombre: "asd",email: "asdasd")
-        then "la validacion falla"
+        then: "la validacion falla"
         !amigo.validate()
         amigo.hasErrors()
         amigo.errors['email'] == 'email'
     }
 
     void "se pasan todas las validacion"() {
-        when "ese cargan todos los atributos bien"
+		given:
+		mockForConstraintsTests AmigoInvisible
+        when: "ese cargan todos los atributos bien"
         def amigo = new AmigoInvisible(nombre: "asd",email: "orquito@gmail.com")
-        then "la validacion anda"
+        then: "la validacion anda"
         amigo.validate()
         !amigo.hasErrors()
     }
