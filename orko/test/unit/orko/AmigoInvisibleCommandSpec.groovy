@@ -17,7 +17,8 @@ class AmigoInvisibleCommandSpec extends Specification {
     }
 
     void "como minimo tiene que haber dos amigos invisibles"() {
-		mockForConstraintsTests AmigoInvisible
+		given:
+			mockForConstraintsTests AmigoInvisible
 		
 		when: "cuando tiene menos de 2 amigos"
 		def amigoInvisibleCommand = new AmigoInvisibleCommand()

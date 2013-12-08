@@ -24,7 +24,7 @@
             </tr>
         </thead>
          <tbody>
-            <g:if test="${amigoInvisible.amigosACalcular != null && !amigoInvisible.amigosACalcular.isEmpty()}">
+            <g:if test="${!amigoInvisible?.amigosACalcular.isEmpty()}">
                   <g:each in="${amigoInvisible.amigosACalcular}" var="amigo">
                       <tr>
                           <td>

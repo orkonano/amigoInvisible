@@ -10,8 +10,9 @@
 
 <body>
 
-
+<div class="alert alert-success">
 	<h3>Revisen los emails</h3>
+</div>
 		
 </body>
 </html>

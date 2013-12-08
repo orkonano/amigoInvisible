@@ -1,13 +1,13 @@
 package orko
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils
 
 
 class AmigoInvisibleService {
 	
 	def emailService
 
-    def void calcularAmigoInvisible(List<AmigoInvisible> amigosFrom) {
+    def List<Regalo> calcularAmigoInvisible(List<AmigoInvisible> amigosFrom) {
 		List<AmigoInvisible> amigosTo = new ArrayList(amigosFrom);
 		Collections.shuffle(amigosTo);
 		List<Regalo> regalos = new ArrayList();
@@ -35,5 +35,6 @@ class AmigoInvisibleService {
 			Regalo regalo = it
 			emailService.enviarMailResultado(regalo);
 		};
+		return regalos
     }
 }
