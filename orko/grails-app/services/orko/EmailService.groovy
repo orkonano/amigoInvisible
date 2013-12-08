@@ -6,8 +6,14 @@ import grails.transaction.Transactional
 class EmailService {
 	
 	def mailService
+	def mailGateway;
+
+//		public void doSomethingMethod() {
+//	   mailGateway.sendMail(recipient);
+//	}
 
     def enviarMailResultado(Regalo regalo) {
+		mailGateway.sendMail(regalo);
 		Thread sendEmail = new Thread(new Runnable() {
 			public void run() {
 				mailService.sendMail {
