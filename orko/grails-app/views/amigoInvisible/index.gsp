@@ -8,9 +8,13 @@
 
 <body>
 
+<g:hasErrors bean="${amigoInvisible}">
+	<div class="alert alert-danger">
+		<g:renderErrors bean="${amigoInvisible}" />
+	</div>
+</g:hasErrors>
 
-
-<g:form name="amigoInvisibleForm" url="[esource:amigoInvisibleCommandInstance ,controller:'amigoInvisible',action:'generarAmigoInvisible']">
+<g:form name="amigoInvisibleForm" url="[resource:amigoInvisibleCommandInstance ,controller:'amigoInvisible',action:'generarAmigoInvisible']">
     <table id="tablaAmigoInvisible" class="table table-striped">
         <thead>
             <tr>
@@ -24,10 +28,10 @@
                   <g:each in="${amigoInvisible.amigosACalcular}" var="amigo">
                       <tr>
                           <td>
-                              <g:textField name="nombre" required="" value="${amigo.nombre}"/>
+                              <g:textField name="nombre" required="" class="form-control" value="${amigo.nombre}"/>
                           </td>
                           <td>
-                             <g:field type="email" name="email" required=""  value="${amigo.email}"/>
+                             <g:field type="email" name="email" required="" class="form-control"  value="${amigo.email}"/>
                           </td>
                           <td><button type="button" class="btn btn-danger eliminarBoton"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></td>
                       </tr>

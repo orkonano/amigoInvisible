@@ -11,13 +11,17 @@ class AmigoInvisibleController {
     }
 
     def generarAmigoInvisible(AmigoInvisibleCommand amigoInvisibleCommandInstance){
-		Thread calcularResultado = new Thread(new Runnable() {
-               public void run() {
-            	   amigoInvisibleService.calcularAmigoInvisible(amigoInvisibleCommandInstance.amigosACalcular)
-               }
-          });
-        calcularResultado.start();
-		render(view:"resultado")
+		if (!amigoInvisibleCommandInstance.hasErrors()){
+			Thread calcularResultado = new Thread(new Runnable() {
+	               public void run() {
+	            	   amigoInvisibleService.calcularAmigoInvisible(amigoInvisibleCommandInstance.amigosACalcular)
+	               }
+	          });
+	        calcularResultado.start();
+			render(view:"resultado")
+		}else{
+			render(view:"index",model:[amigoInvisible: amigoInvisibleCommandInstance])
+		}
     }
 
 }
