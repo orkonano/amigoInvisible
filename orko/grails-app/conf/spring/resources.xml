@@ -9,7 +9,22 @@
               http://www.springframework.org/schema/integration/mail 
               http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.2.xsd">
 
-	<channel id="outboundMailChannel" />
+	<channel id="app-pipeline-chanel"/>
+	<channel id="fisrt-in-line-input"/>
+	
+	<gateway id="appPipelineGateway" default-request-channel="app-pipeline-chanel"
+			service-interface="prueba.AppPipelineGateway"
+			default-reply-timeout="5000"/>
+			
+	<chain input-channel="app-pipeline-chanel">
+		<recipient-list-router>
+			<recipient channel="fisrt-in-line-input"/>
+		</recipient-list-router>
+	</chain>
+	
+	<service-activator input-channel="fisrt-in-line-input"  method="enviarMailResultado" ref="emailNotificator"/>
+
+	<!-- <channel id="outboundMailChannel" />
 	<channel id="xformMailChannel" />
 	<channel id="confirmationChannel" />
 
@@ -32,7 +47,7 @@
 	<transformer input-channel="xformMailChannel"
 		output-channel="outboundMailChannel" ref="mailTransformer" method="transform" />
 
-	<!-- Configure Mail Sender -->
+	Configure Mail Sender
 	<mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
 
 	<beans:bean id="mailMessage" scope="prototype">
@@ -40,6 +55,6 @@
 		<beans:property name="replyTo" value="orkodevapp@gmail.com" />
 	</beans:bean>
 
-	<beans:bean id="mailTransformer" class="transform.EmailTransformer" />
+	<beans:bean id="mailTransformer" class="transform.EmailTransformer" /> -->
 
 </beans:beans>
