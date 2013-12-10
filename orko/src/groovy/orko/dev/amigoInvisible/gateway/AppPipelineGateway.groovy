@@ -1,4 +1,4 @@
-package prueba
+package orko.dev.amigoInvisible.gateway
 
 public interface AppPipelineGateway {
 

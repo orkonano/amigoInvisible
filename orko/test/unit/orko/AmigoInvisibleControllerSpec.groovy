@@ -1,5 +1,8 @@
 package orko
 
+import orko.dev.amigoInvisible.command.AmigoInvisibleCommand;
+import orko.dev.amigoInvisible.controller.AmigoInvisibleController;
+import orko.dev.amigoInvisible.service.AmigoInvisibleService;
 import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin

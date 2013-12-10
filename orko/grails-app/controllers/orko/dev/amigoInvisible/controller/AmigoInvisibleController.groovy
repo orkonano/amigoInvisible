@@ -1,4 +1,6 @@
-package orko
+package orko.dev.amigoInvisible.controller
+
+import orko.dev.amigoInvisible.command.AmigoInvisibleCommand;
 
 
 

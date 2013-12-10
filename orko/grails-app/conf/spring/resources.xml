@@ -10,51 +10,41 @@
               http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.2.xsd">
 
 	<channel id="app-pipeline-chanel"/>
-	<channel id="fisrt-in-line-input"/>
+	<channel id="email-channel-transformer"/>
+	<channel id="outboundMailChannel" />
 	
 	<gateway id="appPipelineGateway" default-request-channel="app-pipeline-chanel"
 			service-interface="prueba.AppPipelineGateway"
 			default-reply-timeout="5000"/>
 			
-	<chain input-channel="app-pipeline-chanel">
-		<recipient-list-router>
-			<recipient channel="fisrt-in-line-input"/>
+	<chain input-channel="app-pipeline-chanel" >
+		<recipient-list-router default-output-channel="errorChannel">
+			<recipient channel="email-channel-transformer" selector-expression="payload.class.simpleName == 'RegaloRecipient'"/>
 		</recipient-list-router>
 	</chain>
 	
-	<service-activator input-channel="fisrt-in-line-input"  method="enviarMailResultado" ref="emailNotificator"/>
-
-	<!-- <channel id="outboundMailChannel" />
-	<channel id="xformMailChannel" />
-	<channel id="confirmationChannel" />
-
-	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<transformer input-channel="email-channel-transformer"	output-channel="outboundMailChannel" ref="emailTransformer" method="transform" />
+	
+	<mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
+	
+	<beans:bean id="mailMessage" scope="prototype" class="org.springframework.mail.SimpleMailMessage">
+		<beans:property name="from" value="orkodevapp@gmail.com" />
+		<beans:property name="replyTo" value="orkodevapp@gmail.com" />
+	</beans:bean>
+	
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" >
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="465" />
 		<beans:property name="username" value="orkodevapp@gmail.com" />
 		<beans:property name="password" value="nano2403" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
-				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
 				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.socketFactory.port">465</beans:prop>
+				<beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
+				<beans:prop key="mail.smtp.socketFactory.fallback">false</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-
-	<gateway id="mailGateway" service-interface="gateways.EmailNotificationGateway"
-		default-request-channel="xformMailChannel" default-reply-channel="confirmationChannel" />
-
-	<transformer input-channel="xformMailChannel"
-		output-channel="outboundMailChannel" ref="mailTransformer" method="transform" />
-
-	Configure Mail Sender
-	<mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
-
-	<beans:bean id="mailMessage" scope="prototype">
-		<beans:property name="from" value="orkodevapp@gmail.com" />
-		<beans:property name="replyTo" value="orkodevapp@gmail.com" />
-	</beans:bean>
-
-	<beans:bean id="mailTransformer" class="transform.EmailTransformer" /> -->
-
+	
 </beans:beans>

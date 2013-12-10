@@ -1,4 +1,4 @@
-package orko
+package orko.dev.amigoInvisible.domain
 
 class AmigoInvisible {
 

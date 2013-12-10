@@ -1,5 +1,6 @@
 package orko
 
+import orko.dev.amigoInvisible.domain.AmigoInvisible;
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification

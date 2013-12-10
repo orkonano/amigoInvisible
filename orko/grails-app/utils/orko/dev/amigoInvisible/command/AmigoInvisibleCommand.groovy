@@ -1,5 +1,7 @@
-package orko
+package orko.dev.amigoInvisible.command
 import java.util.List;
+
+import orko.dev.amigoInvisible.domain.AmigoInvisible;
 
 import grails.validation.Validateable;
 
