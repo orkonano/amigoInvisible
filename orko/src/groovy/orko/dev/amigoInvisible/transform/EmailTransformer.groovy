@@ -24,7 +24,6 @@ class EmailTransformer {
 		}
 		mailMessage.setTo(recipient.recipient.amigoFrom.email);
 		mailMessage.setSubject("${recipient.recipient.amigoFrom.nombre} tu amigo invisible es....")
-		mailMessage.setSentDate(new Date(0));
 		mailMessage.setText(".....${recipient.recipient.amigoTo.nombre}");
   
 	   return mailMessage;

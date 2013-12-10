@@ -1,4 +1,3 @@
-<%@ page import="orko.AmigoInvisible"%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -14,7 +14,7 @@
 	<channel id="outboundMailChannel" />
 	
 	<gateway id="appPipelineGateway" default-request-channel="app-pipeline-chanel"
-			service-interface="prueba.AppPipelineGateway"
+			service-interface="orko.dev.amigoInvisible.gateway.AppPipelineGateway"
 			default-reply-timeout="5000"/>
 			
 	<chain input-channel="app-pipeline-chanel" >
@@ -28,19 +28,19 @@
 	<mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
 	
 	<beans:bean id="mailMessage" scope="prototype" class="org.springframework.mail.SimpleMailMessage">
-		<beans:property name="from" value="orkodevapp@gmail.com" />
-		<beans:property name="replyTo" value="orkodevapp@gmail.com" />
+		<beans:property name="from" value="${grails.mail.from}" />
+		<beans:property name="replyTo" value="${grails.mail.reply}" />
 	</beans:bean>
 	
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" >
-		<beans:property name="host" value="smtp.gmail.com" />
-		<beans:property name="port" value="465" />
-		<beans:property name="username" value="orkodevapp@gmail.com" />
-		<beans:property name="password" value="nano2403" />
+		<beans:property name="host" value="${grails.mail.host}" />
+		<beans:property name="port" value="${grails.mail.port}" />
+		<beans:property name="username" value="${grails.mail.username}" />
+		<beans:property name="password" value="${grails.mail.password}" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
 				<beans:prop key="mail.smtp.auth">true</beans:prop>
-				<beans:prop key="mail.smtp.socketFactory.port">465</beans:prop>
+				<beans:prop key="mail.smtp.socketFactory.port">${grails.mail.port}</beans:prop>
 				<beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
 				<beans:prop key="mail.smtp.socketFactory.fallback">false</beans:prop>
 			</beans:props>

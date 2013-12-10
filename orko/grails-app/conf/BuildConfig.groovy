@@ -50,6 +50,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
          runtime 'mysql:mysql-connector-java:5.1.24'
+		 runtime 'javax.mail:mail:1.4'
 		 compile('org.springframework.integration:spring-integration-core:2.2.6.RELEASE'){
 			 excludes "spring-aop", "spring-beans", "spring-context", "spring-context-support", "spring-core", "spring-tx"
 		 }
@@ -66,7 +67,6 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.0.1"
         compile ':cache:1.1.1'
-		compile ":mail:1.0.1"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.4" // or ":hibernate4:4.1.11.4"
