@@ -2,11 +2,11 @@ package orko.dev.amigoInvisible.transform
 
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.MailMessage
 import org.springframework.stereotype.Component
 
-import orko.dev.amigoInvisible.recipient.RegaloRecipient
+import orko.dev.amigoInvisible.domain.Regalo
 
 @Component
 class EmailTransformer {
@@ -18,13 +18,13 @@ class EmailTransformer {
 		this.mailMessage = mailMessage
 	}
 	  
-	public MailMessage transform(RegaloRecipient recipient) {
+	public MailMessage transform(Regalo recipient) {
 		if (recipient == null) {
 			return null;
 		}
-		mailMessage.setTo(recipient.recipient.amigoFrom.email);
-		mailMessage.setSubject("${recipient.recipient.amigoFrom.nombre} tu amigo invisible es....")
-		mailMessage.setText(".....${recipient.recipient.amigoTo.nombre}");
+		mailMessage.setTo(recipient.amigoFrom.email);
+		mailMessage.setSubject("${recipient.amigoFrom.nombre} tu amigo invisible es....")
+		mailMessage.setText(".....${recipient.amigoTo.nombre}");
   
 	   return mailMessage;
 	}

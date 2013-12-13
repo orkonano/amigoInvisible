@@ -11,6 +11,8 @@
 
 	<channel id="app-pipeline-chanel"/>
 	<channel id="email-channel-transformer"/>
+	<channel id="lista-amigos-channel"/>
+	<channel id="lista-amigos-channel-tranformer"/>
 	<channel id="outboundMailChannel" />
 	
 	<gateway id="appPipelineGateway" default-request-channel="app-pipeline-chanel"
@@ -19,9 +21,14 @@
 			
 	<chain input-channel="app-pipeline-chanel" >
 		<recipient-list-router default-output-channel="errorChannel">
-			<recipient channel="email-channel-transformer" selector-expression="payload.class.simpleName == 'RegaloRecipient'"/>
+			<recipient channel="email-channel-transformer" selector-expression="payload.class.simpleName == 'Regalo'"/>
+			<recipient channel="lista-amigos-channel-transformer" selector-expression="payload.class.simpleName == 'ListAmigoRecipient'"/>
 		</recipient-list-router>
 	</chain>
+	
+	<transformer input-channel="lista-amigos-channel-transformer"	output-channel="lista-amigos-channel" ref="listaAmigoTransformer" method="transform" />
+	
+	<service-activator input-channel="lista-amigos-channel" method="calcularAmigoInvisible" ref="amigoInvisibleService"/>
 	
 	<transformer input-channel="email-channel-transformer"	output-channel="outboundMailChannel" ref="emailTransformer" method="transform" />
 	

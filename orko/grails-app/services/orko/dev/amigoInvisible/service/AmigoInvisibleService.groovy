@@ -4,7 +4,6 @@ import org.apache.commons.collections.CollectionUtils
 
 import orko.dev.amigoInvisible.domain.AmigoInvisible
 import orko.dev.amigoInvisible.domain.Regalo
-import orko.dev.amigoInvisible.recipient.RegaloRecipient
 
 
 class AmigoInvisibleService {
@@ -37,7 +36,7 @@ class AmigoInvisibleService {
 		
 		regalos.each{it -> 
 			Regalo regalo = it
-			appPipelineGateway.request(new RegaloRecipient(regalo))
+			appPipelineGateway.request(regalo)
 		};
 		return regalos
     }

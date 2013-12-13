@@ -1,12 +1,13 @@
 package orko.dev.amigoInvisible.controller
 
-import orko.dev.amigoInvisible.command.AmigoInvisibleCommand;
+import orko.dev.amigoInvisible.command.AmigoInvisibleCommand
+import orko.dev.amigoInvisible.recipient.ListAmigoRecipient
 
 
 
 class AmigoInvisibleController {
 	
-	def amigoInvisibleService
+	def appPipelineGateway
 
     def index() {
 		[amigoInvisible: new AmigoInvisibleCommand()] 
@@ -14,12 +15,14 @@ class AmigoInvisibleController {
 
     def generarAmigoInvisible(AmigoInvisibleCommand amigoInvisibleCommandInstance){
 		if (!amigoInvisibleCommandInstance.hasErrors()){
-			Thread calcularResultado = new Thread(new Runnable() {
-	               public void run() {
-	            	   amigoInvisibleService.calcularAmigoInvisible(amigoInvisibleCommandInstance.amigosACalcular)
-	               }
-	          });
-	        calcularResultado.start();
+			ListAmigoRecipient recipient = new ListAmigoRecipient(amigoInvisibleCommandInstance.amigosACalcular);
+			appPipelineGateway.request(recipient)
+//			Thread calcularResultado = new Thread(new Runnable() {
+//	               public void run() {
+//	            	   amigoInvisibleService.calcularAmigoInvisible(amigoInvisibleCommandInstance.amigosACalcular)
+//	               }
+//	          });
+//	        calcularResultado.start();
 			render(view:"resultado")
 		}else{
 			render(view:"index",model:[amigoInvisible: amigoInvisibleCommandInstance])
