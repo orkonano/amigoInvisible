@@ -20,13 +20,11 @@ class AmigoInvisibleServiceSpec extends Specification {
 
     def cleanup() {
     }
-
+	
     void "test armado de lista debe dar un resultado"() {
 		given:
 			def listaAmigos = [new AmigoInvisible(nombre:"Mariano",email:"orquito@gmail.com"),new AmigoInvisible(nombre:"Mariano 2",email:"orquito@gmail.com")]
-			def emailService = Mock(EmailService)
-			emailService.enviarMailResultado(_) >> { }
-			def amigoService = new AmigoInvisibleService(emailService:emailService)
+			def amigoService = new AmigoInvisibleService()
 		when: "Envio la lista de amigos"
 			def regalo = amigoService.calcularAmigoInvisible(listaAmigos)
 		then: "veo el resultado obtenido"
