@@ -1,5 +1,8 @@
 package orko.dev.amigoInvisible.recipient;
 
+import org.springframework.integration.Message;
+import org.springframework.integration.MessageHeaders;
+
 class Recipient<T> {
 	
 	private T recipient

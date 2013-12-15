@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/integration"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:mail="http://www.springframework.org/schema/integration/mail"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
               http://www.springframework.org/schema/integration
               http://www.springframework.org/schema/integration/spring-integration-2.2.xsd
               http://www.springframework.org/schema/integration/mail 
-              http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.2.xsd">
+              http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.2.xsd
+              http://www.springframework.org/schema/task
+              http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
-	<channel id="app-pipeline-chanel"/>
-	<channel id="email-channel-transformer"/>
-	<channel id="lista-amigos-channel"/>
-	<channel id="lista-amigos-channel-tranformer"/>
-	<channel id="outboundMailChannel" />
-	
-	<gateway id="appPipelineGateway" default-request-channel="app-pipeline-chanel"
-			service-interface="orko.dev.amigoInvisible.gateway.AppPipelineGateway"
-			default-reply-timeout="5000"/>
+	<channel id="app-pipeline-channel"/>
+	<gateway id="appPipelineGateway"  default-request-channel="app-pipeline-channel"
+			service-interface="orko.dev.amigoInvisible.gateway.AppPipelineGateway" 
+			default-request-timeout="5000" />
 			
-	<chain input-channel="app-pipeline-chanel" >
+	 		
+	<chain input-channel="app-pipeline-channel" >
 		<recipient-list-router default-output-channel="errorChannel">
-			<recipient channel="email-channel-transformer" selector-expression="payload.class.simpleName == 'Regalo'"/>
 			<recipient channel="lista-amigos-channel-transformer" selector-expression="payload.class.simpleName == 'ListAmigoRecipient'"/>
 		</recipient-list-router>
-	</chain>
+	</chain> 
+	<channel id="lista-amigos-channel-tranformer"/>
 	
 	<transformer input-channel="lista-amigos-channel-transformer"	output-channel="lista-amigos-channel" ref="listaAmigoTransformer" method="transform" />
 	
-	<service-activator input-channel="lista-amigos-channel" method="calcularAmigoInvisible" ref="amigoInvisibleService"/>
+	<channel id="lista-amigos-channel"/>
+	<service-activator input-channel="lista-amigos-channel" method="calcularAmigoInvisible" ref="amigoInvisibleService" output-channel="lista-regalo-channel" />
 	
-	<transformer input-channel="email-channel-transformer"	output-channel="outboundMailChannel" ref="emailTransformer" method="transform" />
+	<channel id="lista-regalo-channel"/>
+	<splitter input-channel="lista-regalo-channel" ref="regaloSplitter"  method="split" output-channel="email-channel-transformer"/>
+
 	
+	<channel id="email-channel-transformer"/>
+	<transformer input-channel="email-channel-transformer"	output-channel="outboundMailChannel" ref="emailTransformer" method="transform">
+	</transformer>
+	
+	<channel id="outboundMailChannel"/>
+
 	<mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
 	
 	<beans:bean id="mailMessage" scope="prototype" class="org.springframework.mail.SimpleMailMessage">
