@@ -34,10 +34,10 @@ class AmigoInvisibleService {
 			}
 		}
 		
-		regalos.each{it -> 
-			Regalo regalo = it
-			appPipelineGateway.request(regalo)
-		};
+//		regalos.each{it -> 
+//			Regalo regalo = it
+//			appPipelineGateway.request(regalo)
+//		};
 		return regalos
     }
 }
