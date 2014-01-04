@@ -2,14 +2,14 @@ package orko
 
 import orko.dev.amigoInvisible.domain.AmigoInvisible;
 import orko.dev.amigoInvisible.domain.Regalo;
-import grails.test.mixin.*
-import grails.test.mixin.support.GrailsUnitTestMixin
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
  */
-@TestMixin(Regalo)
+@TestFor(Regalo)
 class RegaloSpec extends Specification {
 
     def setup() {

@@ -8,7 +8,6 @@ import orko.dev.amigoInvisible.domain.Regalo
 
 class AmigoInvisibleService {
 	
-	def appPipelineGateway
 
     def List<Regalo> calcularAmigoInvisible(List<AmigoInvisible> amigosFrom) {
 		List<AmigoInvisible> amigosTo = new ArrayList(amigosFrom);
@@ -34,10 +33,6 @@ class AmigoInvisibleService {
 			}
 		}
 		
-//		regalos.each{it -> 
-//			Regalo regalo = it
-//			appPipelineGateway.request(regalo)
-//		};
 		return regalos
     }
 }

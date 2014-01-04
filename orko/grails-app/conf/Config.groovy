@@ -115,8 +115,8 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
-	info 'org.springframework'
-	debug 'org.springframework.integration'
+	info 'org.springframework','org.hibernate'
+	debug 'org.springframework.integration','org.hibernate'
 }
 
 grails {

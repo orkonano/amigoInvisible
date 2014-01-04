@@ -13,13 +13,9 @@
               http://www.springframework.org/schema/task
               http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
-	<channel id="app-pipeline-channel"/>
-	<gateway id="appPipelineGateway"  default-request-channel="app-pipeline-channel"
-			service-interface="orko.dev.amigoInvisible.gateway.AppPipelineGateway" 
-			default-request-timeout="5000" />
-			
+	<channel id="appPipelineChannel" />
 	 		
-	<chain input-channel="app-pipeline-channel" >
+	<chain input-channel="appPipelineChannel" >
 		<recipient-list-router default-output-channel="errorChannel">
 			<recipient channel="lista-amigos-channel-transformer" selector-expression="payload.class.simpleName == 'ListAmigoRecipient'"/>
 		</recipient-list-router>

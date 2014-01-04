@@ -1,11 +1,12 @@
 package orko
 
-import orko.dev.amigoInvisible.command.AmigoInvisibleCommand;
-import orko.dev.amigoInvisible.controller.AmigoInvisibleController;
-import orko.dev.amigoInvisible.service.AmigoInvisibleService;
-import grails.test.mixin.TestFor
-import grails.test.mixin.TestMixin
+import grails.test.mixin.*
 import grails.test.mixin.support.GrailsUnitTestMixin
+
+import org.springframework.integration.MessageChannel
+
+import orko.dev.amigoInvisible.command.AmigoInvisibleCommand
+import orko.dev.amigoInvisible.controller.AmigoInvisibleController
 import spock.lang.Specification
 
 /**
@@ -38,9 +39,9 @@ class AmigoInvisibleControllerSpec extends Specification {
 		given:
 			mockForConstraintsTests AmigoInvisibleCommand
 			def amigoInvisible = new AmigoInvisibleCommand();
-			def serviceMock = Mock(AmigoInvisibleService)
-			serviceMock.calcularAmigoInvisible(_) >> { }
-			controller.amigoInvisibleService = serviceMock
+			def channelMock = Mock(MessageChannel)
+			channelMock.send(_) >> { }
+			controller.appPipelineChannel = channelMock
 		when: "Genero la lisata de amigos invisible sin error"
 			controller.generarAmigoInvisible(amigoInvisible)
 		then: "voy al resultado"
