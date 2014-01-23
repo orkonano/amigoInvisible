@@ -35,16 +35,16 @@ class AmigoInvisibleControllerSpec extends Specification {
 			model.amigoInvisible == amigoInvisible
     }
 	
-	void "renderizar sin error"() {
-		given:
-			mockForConstraintsTests AmigoInvisibleCommand
-			def amigoInvisible = new AmigoInvisibleCommand();
-			def channelMock = Mock(MessageChannel)
-			channelMock.send(_) >> { }
-			controller.appPipelineChannel = channelMock
-		when: "Genero la lisata de amigos invisible sin error"
-			controller.generarAmigoInvisible(amigoInvisible)
-		then: "voy al resultado"
-			view == "/amigoInvisible/resultado"
-	}
+//	void "renderizar sin error"() {
+//		given:
+//			mockForConstraintsTests AmigoInvisibleCommand
+//			def amigoInvisible = new AmigoInvisibleCommand();
+//			def channelMock = Mock(MessageChannel)
+//			channelMock.send(_) >> { }
+//			controller.appPipelineChannel = channelMock
+//		when: "Genero la lisata de amigos invisible sin error"
+//			controller.generarAmigoInvisible(amigoInvisible)
+//		then: "voy al resultado"
+//			view == "/amigoInvisible/resultado"
+//	}
 }

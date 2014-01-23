@@ -139,3 +139,5 @@ grails {
 	  }
 	}
  }
+
+grails.plugins.twitterbootstrap.defaultBundle = 'common'

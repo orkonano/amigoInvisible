@@ -26,7 +26,7 @@ class AmigoInvisibleCommand {
 				return true
 		}
 		
-		partida(validator:subValidator)
+//		partida(validator:subValidator)
 		
 	}
 }
