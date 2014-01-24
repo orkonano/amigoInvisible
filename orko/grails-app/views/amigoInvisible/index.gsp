@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'amigoInvisible.label', default: 'AmigoInvisible')}"/>
-    <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <r:require module="amigoInvisible" />
 </head>
 
 <body>
@@ -17,8 +17,7 @@
 <g:form  name="amigoInvisibleForm" url="[resource:amigoInvisibleCommandInstance ,controller:'amigoInvisible',action:'generarAmigoInvisible']" >
 	<div class="form-group">
 		<label for="partida.name">Ingrese un nombre para identificar</label>
-    	<input type="text" class="form-control" id="partida.name" name="partida.name" placeholder="Ingrese un nombre">
-    	<input type="hidden" name="partida.hidden" placeholder="Ingrese un nombre">
+    	<input type="text" class="form-control" id="partida.name" name="partida.name" placeholder="Ingrese un nombre" required value="${amigoInvisible.partida.name}">
 	</div>	
 	<div class="form-group">
 	    <table id="tablaAmigoInvisible" class="table table-striped">
@@ -61,6 +60,7 @@
 	    </table>
     </div>
 </g:form>
+
 <script id="nuevas-filas" type="text/html">
 	<tr>
 		<td><input type="text" name="nombre" class="form-control" required="" value="" id="nombre"></td>

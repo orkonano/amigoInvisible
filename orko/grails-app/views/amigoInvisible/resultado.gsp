@@ -2,15 +2,13 @@
 <html>
 <head>
 <meta name="layout" content="main">
-<g:set var="entityName"
-	value="${message(code: 'amigoInvisible.label', default: 'AmigoInvisible')}" />
-<title><g:message code="default.list.label" args="[entityName]" /></title>
+<r:require module="bootstrap" />
 </head>
 
 <body>
 
 <div class="alert alert-success">
-	<h3>Revisen los emails</h3>
+	<h3>${nombrePartida} por favor revise los emails</h3>
 </div>
 <div>
 	<g:link action="index" class="btn btn-default btn-lg active">Crear Nuevos Amigos</g:link>

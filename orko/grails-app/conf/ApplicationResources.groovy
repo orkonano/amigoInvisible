@@ -3,13 +3,10 @@ modules = {
 		jquery {
 			defaultBundle 'common'
 		}
-		bootstrap {
-			defaultBundle 'common'
-		}
 	}
     
 	amigoInvisible{
-		dependsOn 'jquery, mustache, bootstrap'
+		dependsOn 'mustache'
 		defaultBundle 'common'
 		
 		resource url:'js/amigoInvisible.js'
