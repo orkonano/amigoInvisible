@@ -17,12 +17,19 @@
 	 		
 	<chain input-channel="appPipelineChannel" >
 		<recipient-list-router default-output-channel="errorChannel">
-			<recipient channel="lista-amigos-channel-transformer" selector-expression="payload.class.simpleName == 'ListAmigoRecipient'"/>
+			<recipient channel="partida-channel-transformer" selector-expression="payload.class.simpleName == 'ListAmigoRecipient'"/>
 		</recipient-list-router>
-	</chain> 
-	<channel id="lista-amigos-channel-tranformer"/>
-	
-	<transformer input-channel="lista-amigos-channel-transformer"	output-channel="lista-amigos-channel" ref="listaAmigoTransformer" method="transform" />
+	</chain>
+
+    <channel id="partida-channel-transformer"/>
+      <transformer input-channel="partida-channel-transformer"	output-channel="partida-channel" ref="partidaTransformer" method="transform" />
+
+    <channel id="partida-channel"/>
+    <service-activator input-channel="partida-channel" method="savePartida" ref="partidaService" output-channel="lista-amigos-channel" />
+
+    <!--<channel id="lista-amigos-channel-tranformer"/>
+
+    <transformer input-channel="lista-amigos-channel-transformer"	output-channel="lista-amigos-channel" ref="listaAmigoTransformer" method="transform" />-->
 	
 	<channel id="lista-amigos-channel"/>
 	<service-activator input-channel="lista-amigos-channel" method="calcularAmigoInvisible" ref="amigoInvisibleService" output-channel="lista-regalo-channel" />

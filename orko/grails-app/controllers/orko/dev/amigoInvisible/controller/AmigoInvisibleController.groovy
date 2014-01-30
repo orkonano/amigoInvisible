@@ -19,8 +19,9 @@ class AmigoInvisibleController {
 
     def generarAmigoInvisible(AmigoInvisibleCommand amigoInvisibleCommandInstance){
 		if (!amigoInvisibleCommandInstance.hasErrors()){
-			ListAmigoRecipient recipient = new ListAmigoRecipient(amigoInvisibleCommandInstance.amigosACalcular);
-			Message<ListAmigoRecipient> message = MessageBuilder.withPayload(recipient).build()
+			ListAmigoRecipient recipients = new ListAmigoRecipient(amigoInvisibleCommandInstance.amigosACalcular)
+            recipients.partida = amigoInvisibleCommandInstance.partida
+			Message<ListAmigoRecipient> message = MessageBuilder.withPayload(recipients).build()
 			appPipelineChannel.send(message)
 			
 			render(view:"resultado",model:[nombrePartida:amigoInvisibleCommandInstance.partida.name])

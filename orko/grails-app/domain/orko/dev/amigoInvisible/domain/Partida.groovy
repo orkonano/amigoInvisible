@@ -4,10 +4,9 @@ class Partida {
 	
 	String code
 	String name;
-	List<AmigoInvisible> participantes
-	List<Regalo> regalos
-	
-	static hasMany = [participantes: AmigoInvisible,regalos: Regalo]
+
+	static hasMany = [participantes: AmigoInvisible]
+    static belongsTo = [AmigoInvisible,Regalo]
 
     static constraints = {
 		code blank: false

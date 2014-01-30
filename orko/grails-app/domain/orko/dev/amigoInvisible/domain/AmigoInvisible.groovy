@@ -2,9 +2,10 @@ package orko.dev.amigoInvisible.domain
 
 class AmigoInvisible {
 
-
 	String nombre
 	String email
+
+    static hasMany = [partidas: Partida]
 
 	static constraints = {
 		nombre blank: false
