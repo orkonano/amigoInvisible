@@ -4,12 +4,14 @@ class AmigoInvisible {
 
 	String nombre
 	String email
+    User user
 
     static hasMany = [partidas: Partida]
 
 	static constraints = {
 		nombre blank: false
 		email email: true, blank: false
+        user nullable: true
 	}
 
 	@Override

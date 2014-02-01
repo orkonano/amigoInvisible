@@ -86,6 +86,7 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        grails.resources.mappers.yuicssminify.disable=true
     }
 	test{
 		grails.mail.disabled = true
@@ -116,6 +117,7 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 	info 'org.springframework','org.hibernate'
+    info 'grails.plugin.springsecurity.web.filter.DebugFilter'
 	debug 'org.springframework.integration','org.hibernate'
 }
 
@@ -141,3 +143,23 @@ grails {
  }
 
 grails.plugins.twitterbootstrap.defaultBundle = 'common'
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'orko.dev.amigoInvisible.domain.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'orko.dev.amigoInvisible.domain.UserRole'
+grails.plugin.springsecurity.authority.className = 'orko.dev.amigoInvisible.domain.Role'
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+    '/amigoInvisible':                ['permitAll'],
+    '/amigoInvisible/index':                ['permitAll'],
+    '/amigoInvisible/generarAmigoInvisible':                ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
