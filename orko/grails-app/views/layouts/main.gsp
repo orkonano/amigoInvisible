@@ -16,13 +16,38 @@
 	</head>
 	<body>
 		<div class="container">
-            <sec:ifLoggedIn>
-                Hola <sec:username/>!
-                <g:remoteLink class="btn btn-default btn-xs" controller="logout" onSuccess="window.location.assign(${createLinkTo(dir: '/')})">Salir</g:remoteLink>
-            </sec:ifLoggedIn>
-            <sec:ifNotLoggedIn>
-                <g:link controller='login' action='auth' class="btn btn-default btn-xs">Entrar</g:link>
-            </sec:ifNotLoggedIn>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">
+                            <sec:ifNotLoggedIn>Amigos</sec:ifNotLoggedIn>
+                            <sec:ifLoggedIn>Hola <sec:username/>!</sec:ifLoggedIn>
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <sec:ifNotLoggedIn>
+                            <li><g:link controller='login' action='auth'>Entrar</g:link></li>
+                            </sec:ifNotLoggedIn>
+                            <sec:ifLoggedIn>
+                                <li><g:remoteLink controller="logout" onSuccess="window.location.assign(${createLinkTo(dir: '/')})">Salir</g:remoteLink></li>
+                            </sec:ifLoggedIn>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+
+
+
+
+
+            </nav>
+
 			<div class="jumbotron">
 				<div class="container">
 					<h1>El amigo invisible</h1>
