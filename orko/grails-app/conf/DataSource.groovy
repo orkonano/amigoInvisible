@@ -29,7 +29,7 @@ environments {
     production {
         dataSource {
 			jndiName = "java:comp/env/jdbc/amigoInvisible"
-            dbCreate = "create"
+            dbCreate = "create-drop"
             properties {
                maxActive = -1
                minEvictableIdleTimeMillis=1800000
