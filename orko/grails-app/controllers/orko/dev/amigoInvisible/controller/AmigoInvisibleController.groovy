@@ -1,5 +1,6 @@
 package orko.dev.amigoInvisible.controller
 
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.integration.Message
 import org.springframework.integration.support.MessageBuilder
 
@@ -13,10 +14,12 @@ class AmigoInvisibleController {
 	
 	def appPipelineChannel
 
+    @Secured(['permitAll'])
     def index() {
 		[amigoInvisible: new AmigoInvisibleCommand(partida:new Partida())] 
     }
 
+    @Secured(['permitAll'])
     def generarAmigoInvisible(AmigoInvisibleCommand amigoInvisibleCommandInstance){
 		if (!amigoInvisibleCommandInstance.hasErrors()){
 			ListAmigoRecipient recipients = new ListAmigoRecipient(amigoInvisibleCommandInstance.amigosACalcular)

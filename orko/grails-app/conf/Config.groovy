@@ -152,9 +152,6 @@ grails.plugin.springsecurity.authority.className = 'orko.dev.amigoInvisible.doma
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
-    '/amigoInvisible':                ['permitAll'],
-    '/amigoInvisible/index':                ['permitAll'],
-    '/amigoInvisible/generarAmigoInvisible':                ['permitAll'],
 	'/index':                         ['permitAll'],
 	'/index.gsp':                     ['permitAll'],
 	'/**/js/**':                      ['permitAll'],
@@ -162,4 +159,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll']
 ]
+
+grails.plugin.springsecurity.roleHierarchy = '''
+   ROLE_ADM > ROLE_US
+'''
 
