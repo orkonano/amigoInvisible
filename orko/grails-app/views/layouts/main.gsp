@@ -16,6 +16,13 @@
 	</head>
 	<body>
 		<div class="container">
+            <sec:ifLoggedIn>
+                Hola <sec:username/>!
+                <g:remoteLink class="btn btn-default btn-xs" controller="logout" onSuccess="window.location.assign(${createLinkTo(dir: '/')})">Salir</g:remoteLink>
+            </sec:ifLoggedIn>
+            <sec:ifNotLoggedIn>
+                <g:link controller='login' action='auth' class="btn btn-default btn-xs">Entrar</g:link>
+            </sec:ifNotLoggedIn>
 			<div class="jumbotron">
 				<div class="container">
 					<h1>El amigo invisible</h1>
