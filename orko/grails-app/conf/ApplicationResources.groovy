@@ -25,6 +25,7 @@ modules = {
 	application {
 		defaultBundle 'common'
 		resource url:'js/application.js'
+        resource url:'js/login_logout.js'
 	}
 	
 	

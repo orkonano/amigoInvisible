@@ -36,7 +36,8 @@
                             <li><g:link controller='login' action='auth'>Entrar</g:link></li>
                             </sec:ifNotLoggedIn>
                             <sec:ifLoggedIn>
-                                <li><g:remoteLink controller="logout" onSuccess="window.location.assign(${createLinkTo(dir: '/')})">Salir</g:remoteLink></li>
+                                <li>
+                                    <g:link data-action="logout" data-url-logout="${createLink(controller:'logout')}" data-url-redirect="${createLinkTo(dir: '/')}">Salir</g:link>
                             </sec:ifLoggedIn>
                         </ul>
                     </div><!-- /.navbar-collapse -->
