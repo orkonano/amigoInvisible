@@ -12,9 +12,10 @@ class AmigoInvisibleService {
 
     def regaloService
     def customSecurityService
-	
+
 
     def List<Regalo> calcularAmigoInvisible(Partida partida) {
+        partida = Partida.findById partida.id
 		List<AmigoInvisible> amigosTo = new ArrayList(partida.participantes)
         List<AmigoInvisible> amigosFrom = new ArrayList(partida.participantes)
         Collections.shuffle(amigosTo)
@@ -23,9 +24,9 @@ class AmigoInvisibleService {
 		int index = 0;
 		Random random = new Random()
 		while(CollectionUtils.isNotEmpty(amigosTo)){
-			AmigoInvisible amigoTo = saveAmigoInvisible amigosTo.get(0), partida
-            AmigoInvisible amigoFrom = saveAmigoInvisible amigosFrom.get(index), partida
-			if (amigoTo.nombre != amigoFrom.nombre){
+			AmigoInvisible amigoTo = amigosTo.get(0)
+            AmigoInvisible amigoFrom = amigosFrom.get(index)
+			if (amigoTo.id != amigoFrom.id){
 				amigosTo.remove(0)
                 Regalo regalo = regaloService.createRegalo amigoFrom, amigoTo, partida
 				regalos.add(regalo)
@@ -41,18 +42,22 @@ class AmigoInvisibleService {
 		return regalos
     }
 
-    def AmigoInvisible saveAmigoInvisible(AmigoInvisible amigo, Partida partida){
-        def amigoDB = AmigoInvisible.findByEmail(amigo.email)
-        if (!amigoDB){
-            def user = customSecurityService.findOrSaveUserByUserName(amigo.email)
-            amigo.user = user
+    def Partida saveAmigoInvisible(Partida partida){
+        List participantes = new ArrayList<AmigoInvisible>(partida.participantes)
+        partida.participantes.clear()
+        for (amigo in participantes){
+            def nombreAux = amigo.nombre
+            def email = amigo.email
+            amigo = AmigoInvisible.findByEmail(email)
+            if (!amigo){
+                def user = customSecurityService.findOrSaveUserByUserName(email)
+                amigo.user = user
+                amigo.email = email
+            }
+            amigo.nombre = nombreAux
+            amigo.addToPartidas(partida)
             amigo.save()
-            amigoDB = amigo
-        }else{
-            amigoDB.nombre = amigo.nombre
         }
-        amigoDB.addToPartidas(partida)
-        amigoDB.save()
-        return amigoDB
+        return partida
     }
 }

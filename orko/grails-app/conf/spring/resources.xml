@@ -7,42 +7,31 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
               http://www.springframework.org/schema/integration
-              http://www.springframework.org/schema/integration/spring-integration-2.2.xsd
+              http://www.springframework.org/schema/integration/spring-integration-3.0.xsd
               http://www.springframework.org/schema/integration/mail 
-              http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.2.xsd
+              http://www.springframework.org/schema/integration/mail/spring-integration-mail-3.0.xsd
               http://www.springframework.org/schema/task
               http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
 	<channel id="appPipelineChannel" />
-	 		
-	<chain input-channel="appPipelineChannel" >
-		<recipient-list-router default-output-channel="errorChannel">
-			<recipient channel="partida-channel-transformer" selector-expression="payload.class.simpleName == 'ListAmigoRecipient'"/>
-		</recipient-list-router>
-	</chain>
-
-    <channel id="partida-channel-transformer"/>
-      <transformer input-channel="partida-channel-transformer"	output-channel="partida-channel" ref="partidaTransformer" method="transform" />
-
     <channel id="partida-channel"/>
-    <service-activator input-channel="partida-channel" method="savePartida" ref="partidaService" output-channel="lista-amigos-channel" />
+	<transformer input-channel="appPipelineChannel"	output-channel="partida-channel" ref="partidaTransformer" method="transform" />
 
-    <!--<channel id="lista-amigos-channel-tranformer"/>
+    <channel id="registro-usuario-channel"/>
+    <service-activator input-channel="partida-channel" method="savePartida" ref="partidaService" output-channel="registro-usuario-channel" />
 
-    <transformer input-channel="lista-amigos-channel-transformer"	output-channel="lista-amigos-channel" ref="listaAmigoTransformer" method="transform" />-->
-	
-	<channel id="lista-amigos-channel"/>
+    <channel id="lista-amigos-channel"/>
+    <service-activator input-channel="registro-usuario-channel" method="saveAmigoInvisible" ref="amigoInvisibleService" output-channel="lista-amigos-channel" />
+
+    <channel id="lista-regalo-channel"/>
 	<service-activator input-channel="lista-amigos-channel" method="calcularAmigoInvisible" ref="amigoInvisibleService" output-channel="lista-regalo-channel" />
-	
-	<channel id="lista-regalo-channel"/>
+
+    <channel id="email-channel-transformer"/>
 	<splitter input-channel="lista-regalo-channel" ref="regaloSplitter"  method="split" output-channel="email-channel-transformer"/>
 
-	
-	<channel id="email-channel-transformer"/>
+    <channel id="outboundMailChannel"/>
 	<transformer input-channel="email-channel-transformer"	output-channel="outboundMailChannel" ref="emailTransformer" method="transform">
 	</transformer>
-	
-	<channel id="outboundMailChannel"/>
 
 	<mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
 	
