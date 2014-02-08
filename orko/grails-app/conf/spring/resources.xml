@@ -13,21 +13,27 @@
               http://www.springframework.org/schema/task
               http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
-	<channel id="appPipelineChannel" />
+	<channel id="appSyncChannel" />
     <channel id="partida-channel"/>
-	<transformer input-channel="appPipelineChannel"	output-channel="partida-channel" ref="partidaTransformer" method="transform" />
+	<transformer input-channel="appSyncChannel"	output-channel="partida-channel" ref="partidaTransformer" method="transform" />
+
+    <channel id="registro-amigoInvisible-channel"/>
+    <service-activator input-channel="partida-channel" method="savePartida" ref="partidaService" output-channel="registro-amigoInvisible-channel" />
 
     <channel id="registro-usuario-channel"/>
-    <service-activator input-channel="partida-channel" method="savePartida" ref="partidaService" output-channel="registro-usuario-channel" />
+    <service-activator input-channel="registro-amigoInvisible-channel" method="saveAmigoInvisible" ref="amigoInvisibleService" output-channel="registro-usuario-channel" />
 
     <channel id="lista-amigos-channel"/>
-    <service-activator input-channel="registro-usuario-channel" method="saveAmigoInvisible" ref="amigoInvisibleService" output-channel="lista-amigos-channel" />
+    <service-activator input-channel="registro-usuario-channel" method="saveUser" ref="customSecurityService" output-channel="lista-amigos-channel" />
 
     <channel id="lista-regalo-channel"/>
 	<service-activator input-channel="lista-amigos-channel" method="calcularAmigoInvisible" ref="amigoInvisibleService" output-channel="lista-regalo-channel" />
 
+    <channel id="regalos-procesados-channel"/>
+    <service-activator input-channel="lista-regalo-channel" method="saveRegalos" ref="regaloService" output-channel="regalos-procesados-channel" />
+
     <channel id="email-channel-transformer"/>
-	<splitter input-channel="lista-regalo-channel" ref="regaloSplitter"  method="split" output-channel="email-channel-transformer"/>
+	<splitter input-channel="regalos-procesados-channel" ref="regaloSplitter"  method="split" output-channel="email-channel-transformer"/>
 
     <channel id="outboundMailChannel"/>
 	<transformer input-channel="email-channel-transformer"	output-channel="outboundMailChannel" ref="emailTransformer" method="transform">

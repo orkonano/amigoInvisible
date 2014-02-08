@@ -12,9 +12,11 @@ class RegaloService {
 
     }
 
-    Regalo createRegalo(AmigoInvisible amigoFrom, AmigoInvisible amigoTo, Partida partida) {
-        Regalo regalo = new Regalo(amigoFrom: amigoFrom,amigoTo: amigoTo, partida: partida)
-        regalo.save()
-        return regalo
+    List<Regalo> saveRegalos(List<Regalo> regalos) {
+        regalos.each {regalo ->
+            regalo.save()
+        }
+        return regalos
     }
+
 }

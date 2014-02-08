@@ -10,9 +10,6 @@ import orko.dev.amigoInvisible.domain.Regalo
 @Transactional
 class AmigoInvisibleService {
 
-    def regaloService
-    def customSecurityService
-
 
     def List<Regalo> calcularAmigoInvisible(Partida partida) {
         partida = Partida.findById partida.id
@@ -28,7 +25,7 @@ class AmigoInvisibleService {
             AmigoInvisible amigoFrom = amigosFrom.get(index)
 			if (amigoTo.id != amigoFrom.id){
 				amigosTo.remove(0)
-                Regalo regalo = regaloService.createRegalo amigoFrom, amigoTo, partida
+                Regalo regalo = new Regalo(amigoFrom: amigoFrom,amigoTo: amigoTo, partida: partida)
 				regalos.add(regalo)
 				index++
 			}else{
@@ -50,9 +47,7 @@ class AmigoInvisibleService {
             def email = amigo.email
             amigo = AmigoInvisible.findByEmail(email)
             if (!amigo){
-                def user = customSecurityService.findOrSaveUserByUserName(email)
-                amigo.user = user
-                amigo.email = email
+                amigo = new AmigoInvisible(email: email)
             }
             amigo.nombre = nombreAux
             amigo.addToPartidas(partida)

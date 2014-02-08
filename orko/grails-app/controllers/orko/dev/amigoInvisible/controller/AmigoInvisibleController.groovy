@@ -12,7 +12,7 @@ import orko.dev.amigoInvisible.recipient.ListAmigoRecipient
 
 class AmigoInvisibleController {
 	
-	def appPipelineChannel
+	def appSyncChannel
 
     @Secured(['permitAll'])
     def index() {
@@ -25,7 +25,7 @@ class AmigoInvisibleController {
 			ListAmigoRecipient recipients = new ListAmigoRecipient(amigoInvisibleCommandInstance.amigosACalcular)
             recipients.partida = amigoInvisibleCommandInstance.partida
 			Message<ListAmigoRecipient> message = MessageBuilder.withPayload(recipients).build()
-			appPipelineChannel.send(message)
+			appSyncChannel.send(message)
 			
 			render(view:"resultado",model:[nombrePartida:amigoInvisibleCommandInstance.partida.name])
 		}else{

@@ -119,6 +119,7 @@ log4j = {
 	info 'org.springframework','org.hibernate'
     info 'grails.plugin.springsecurity.web.filter.DebugFilter'
 	debug 'org.springframework.integration','org.hibernate'
+    trace 'org.hibernate.SQL'
 }
 
 grails {
