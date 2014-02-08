@@ -13,6 +13,7 @@
               http://www.springframework.org/schema/task
               http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
+
     <poller id="defaultPoller" fixed-delay="500" default="true" />
 
 
@@ -41,12 +42,8 @@
     <channel id="regalos-procesados-channel"/>
     <service-activator input-channel="lista-regalo-channel" method="saveRegalos" ref="regaloService" output-channel="regalos-procesados-channel" />
 
-    
-    
     <channel id="email-channel-transformer"/>
 	<splitter input-channel="regalos-procesados-channel" ref="regaloSplitter"  method="split" output-channel="email-channel-transformer"/>
-
-
 
 	<transformer input-channel="email-channel-transformer"	output-channel="appAsyncChannel" ref="emailTransformer" method="transform"/>
 
@@ -71,5 +68,9 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
+
+    <beans:bean id="emailTransformer" class="orko.dev.amigoInvisible.transform.EmailTransformer">
+        <beans:lookup-method name="createSimpleMailMessage" bean="mailMessage"/>
+    </beans:bean>
 	
 </beans:beans>
