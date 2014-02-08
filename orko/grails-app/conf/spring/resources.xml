@@ -13,12 +13,21 @@
               http://www.springframework.org/schema/task
               http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
+    <poller id="defaultPoller" fixed-delay="500" default="true" />
+
+
 	<channel id="appSyncChannel" />
-    <channel id="partida-channel"/>
-	<transformer input-channel="appSyncChannel"	output-channel="partida-channel" ref="partidaTransformer" method="transform" />
+    <channel id="appAsyncChannel" >
+        <queue/>
+    </channel>
+
+    <channel id="outboundMailChannel"/>
+    <router input-channel="appAsyncChannel" expression="payload.class.simpleName">
+        <mapping  value="SimpleMailMessage" channel="outboundMailChannel"/>
+    </router>
 
     <channel id="registro-amigoInvisible-channel"/>
-    <service-activator input-channel="partida-channel" method="savePartida" ref="partidaService" output-channel="registro-amigoInvisible-channel" />
+    <service-activator input-channel="appSyncChannel" method="savePartida" ref="partidaService" output-channel="registro-amigoInvisible-channel" />
 
     <channel id="registro-usuario-channel"/>
     <service-activator input-channel="registro-amigoInvisible-channel" method="saveAmigoInvisible" ref="amigoInvisibleService" output-channel="registro-usuario-channel" />
@@ -32,12 +41,14 @@
     <channel id="regalos-procesados-channel"/>
     <service-activator input-channel="lista-regalo-channel" method="saveRegalos" ref="regaloService" output-channel="regalos-procesados-channel" />
 
+    
+    
     <channel id="email-channel-transformer"/>
 	<splitter input-channel="regalos-procesados-channel" ref="regaloSplitter"  method="split" output-channel="email-channel-transformer"/>
 
-    <channel id="outboundMailChannel"/>
-	<transformer input-channel="email-channel-transformer"	output-channel="outboundMailChannel" ref="emailTransformer" method="transform">
-	</transformer>
+
+
+	<transformer input-channel="email-channel-transformer"	output-channel="appAsyncChannel" ref="emailTransformer" method="transform"/>
 
 	<mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
 	

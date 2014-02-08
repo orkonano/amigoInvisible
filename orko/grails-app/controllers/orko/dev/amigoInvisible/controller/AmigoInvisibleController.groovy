@@ -22,9 +22,8 @@ class AmigoInvisibleController {
     @Secured(['permitAll'])
     def generarAmigoInvisible(AmigoInvisibleCommand amigoInvisibleCommandInstance){
 		if (!amigoInvisibleCommandInstance.hasErrors()){
-			ListAmigoRecipient recipients = new ListAmigoRecipient(amigoInvisibleCommandInstance.amigosACalcular)
-            recipients.partida = amigoInvisibleCommandInstance.partida
-			Message<ListAmigoRecipient> message = MessageBuilder.withPayload(recipients).build()
+            amigoInvisibleCommandInstance.partida.participantes = amigoInvisibleCommandInstance.amigosACalcular
+			Message<Partida> message = MessageBuilder.withPayload(amigoInvisibleCommandInstance.partida).build()
 			appSyncChannel.send(message)
 			
 			render(view:"resultado",model:[nombrePartida:amigoInvisibleCommandInstance.partida.name])
