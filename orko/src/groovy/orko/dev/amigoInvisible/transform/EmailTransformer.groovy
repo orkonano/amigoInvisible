@@ -1,12 +1,7 @@
 package orko.dev.amigoInvisible.transform
 
-
-
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.MailMessage
 import org.springframework.mail.SimpleMailMessage
-import org.springframework.stereotype.Component
-
 import orko.dev.amigoInvisible.domain.Regalo
 
 abstract class EmailTransformer {
