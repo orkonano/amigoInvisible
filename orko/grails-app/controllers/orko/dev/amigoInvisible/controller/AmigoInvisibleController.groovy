@@ -3,12 +3,8 @@ package orko.dev.amigoInvisible.controller
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.integration.Message
 import org.springframework.integration.support.MessageBuilder
-
 import orko.dev.amigoInvisible.command.AmigoInvisibleCommand
 import orko.dev.amigoInvisible.domain.Partida
-import orko.dev.amigoInvisible.recipient.ListAmigoRecipient
-
-
 
 class AmigoInvisibleController {
 	

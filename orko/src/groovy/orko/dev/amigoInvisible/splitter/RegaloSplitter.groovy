@@ -1,7 +1,6 @@
 package orko.dev.amigoInvisible.splitter
 
 import org.springframework.stereotype.Component
-
 import orko.dev.amigoInvisible.domain.Regalo
 
 @Component

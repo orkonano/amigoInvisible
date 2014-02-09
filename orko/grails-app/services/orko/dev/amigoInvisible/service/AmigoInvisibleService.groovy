@@ -2,7 +2,6 @@ package orko.dev.amigoInvisible.service
 
 import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
-
 import orko.dev.amigoInvisible.domain.AmigoInvisible
 import orko.dev.amigoInvisible.domain.Partida
 import orko.dev.amigoInvisible.domain.Regalo

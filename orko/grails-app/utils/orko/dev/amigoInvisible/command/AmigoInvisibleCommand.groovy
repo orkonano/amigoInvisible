@@ -1,5 +1,4 @@
 package orko.dev.amigoInvisible.command
-import javax.validation.Valid;
 
 import grails.validation.Validateable
 import orko.dev.amigoInvisible.domain.AmigoInvisible

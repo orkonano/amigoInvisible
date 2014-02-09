@@ -1,11 +1,11 @@
 
 package orko
 
-import orko.dev.amigoInvisible.domain.AmigoInvisible;
-import orko.dev.amigoInvisible.service.AmigoInvisibleService;
 import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
+import orko.dev.amigoInvisible.domain.AmigoInvisible
+import orko.dev.amigoInvisible.service.AmigoInvisibleService
 import spock.lang.Specification
 
 /**

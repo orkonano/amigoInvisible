@@ -1,10 +1,8 @@
 package orko
 
-import grails.test.mixin.*
+import grails.test.mixin.TestFor
+import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
-
-import org.springframework.integration.MessageChannel
-
 import orko.dev.amigoInvisible.command.AmigoInvisibleCommand
 import orko.dev.amigoInvisible.controller.AmigoInvisibleController
 import spock.lang.Specification
