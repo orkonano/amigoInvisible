@@ -1,13 +1,9 @@
 package orko.dev.amigoInvisible.transform
 
-
-
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.MailMessage
 import org.springframework.mail.SimpleMailMessage
-import org.springframework.stereotype.Component
-
 import orko.dev.amigoInvisible.domain.Regalo
+import orko.dev.amigoInvisible.helper.UserRegistrado
 
 abstract class EmailTransformer {
 
@@ -27,4 +23,13 @@ abstract class EmailTransformer {
 	}
 
     public abstract SimpleMailMessage createSimpleMailMessage()
+
+
+    public MailMessage transformEmailRegistro(UserRegistrado usuarioRegistrado){
+        def mailMessage = createSimpleMailMessage()
+        mailMessage.setTo(usuarioRegistrado.usuarioRegistrado.username);
+        mailMessage.setSubject("Hola ${usuarioRegistrado.usuarioRegistrado.username}, te enviamos tu password de tu amigo invisible")
+        mailMessage.setText("Tu password es: ${usuarioRegistrado.uncodePassword}");
+        return mailMessage;
+    }
 }
