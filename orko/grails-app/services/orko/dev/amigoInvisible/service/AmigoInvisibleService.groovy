@@ -16,22 +16,18 @@ class AmigoInvisibleService {
         List<AmigoInvisible> amigosFrom = new ArrayList(partida.participantes)
         Collections.shuffle(amigosTo)
 		List<Regalo> regalos = new ArrayList()
-		int maxSize = amigosFrom.size()
-		int index = 0;
+		def index
 		Random random = new Random()
 		while(CollectionUtils.isNotEmpty(amigosTo)){
+            index = random.nextInt(amigosFrom.size())
 			AmigoInvisible amigoTo = amigosTo.get(0)
             AmigoInvisible amigoFrom = amigosFrom.get(index)
 			if (amigoTo.id != amigoFrom.id){
 				amigosTo.remove(0)
+                amigosFrom.remove(index)
                 Regalo regalo = new Regalo(amigoFrom: amigoFrom,amigoTo: amigoTo, partida: partida)
 				regalos.add(regalo)
-				index++
 			}else{
-				if(amigosTo.size() == 1){
-					amigosTo = new ArrayList(amigosFrom)
-					index = 0
-				} 
 				Collections.shuffle(amigosTo)
 			}
 		}

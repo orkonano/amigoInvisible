@@ -27,17 +27,29 @@
     <channel id="registro-amigoInvisible-channel"/>
     <service-activator input-channel="appSyncChannel" method="savePartida" ref="partidaService" output-channel="registro-amigoInvisible-channel" />
 
-    <channel id="registro-usuario-channel"/>
-    <service-activator input-channel="registro-amigoInvisible-channel" method="saveAmigoInvisible" ref="amigoInvisibleService" output-channel="registro-usuario-channel" />
+    <channel id="amigos-invisibles-registrados"/>
+    <service-activator input-channel="registro-amigoInvisible-channel" method="saveAmigoInvisible" ref="amigoInvisibleService" output-channel="amigos-invisibles-registrados" />
 
-    <channel id="lista-amigos-channel"/>
-    <service-activator input-channel="registro-usuario-channel" method="saveUser" ref="customSecurityService" output-channel="lista-amigos-channel" />
+    <channel id="regalos-a-calcular"/>
+    <channel id="usuarios-a-registrar"/>
+    <recipient-list-router input-channel="amigos-invisibles-registrados">
+        <recipient channel="usuarios-a-registrar"/>
+        <recipient channel="regalos-a-calcular"/>
+    </recipient-list-router>
 
-    <channel id="lista-regalo-channel"/>
-	<service-activator input-channel="lista-amigos-channel" method="calcularAmigoInvisible" ref="amigoInvisibleService" output-channel="lista-regalo-channel" />
+    <channel id="usuarios-registrados"/>
+    <service-activator input-channel="usuarios-a-registrar" method="saveUser" ref="customSecurityService" output-channel="usuarios-registrados" />
+
+    <channel id="email-registro-channel-transformer"/>
+    <splitter input-channel="usuarios-registrados" ref="userSplitter"  method="split" output-channel="email-registro-channel-transformer"/>
+
+    <transformer input-channel="email-registro-channel-transformer"	output-channel="appAsyncChannel" ref="emailTransformer" method="transformEmailRegistro"/>
+
+    <channel id="regalos-a-registrar"/>
+	<service-activator input-channel="regalos-a-calcular" method="calcularAmigoInvisible" ref="amigoInvisibleService" output-channel="regalos-a-registrar" />
 
     <channel id="regalos-procesados-channel"/>
-    <service-activator input-channel="lista-regalo-channel" method="saveRegalos" ref="regaloService" output-channel="regalos-procesados-channel" />
+    <service-activator input-channel="regalos-a-registrar" method="saveRegalos" ref="regaloService" output-channel="regalos-procesados-channel" />
 
     <channel id="email-channel-transformer"/>
 	<splitter input-channel="regalos-procesados-channel" ref="regaloSplitter"  method="split" output-channel="email-channel-transformer"/>
