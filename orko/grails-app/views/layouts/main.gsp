@@ -36,8 +36,8 @@
                             <li><g:link controller='login' action='auth'>Entrar</g:link></li>
                             </sec:ifNotLoggedIn>
                             <sec:ifLoggedIn>
-                                <li>
-                                    <g:link data-action="logout" data-url-logout="${createLink(controller:'logout')}" data-url-redirect="${createLinkTo(dir: '/')}">Salir</g:link>
+                                <li><g:link controller="partida" action="partidas">Tus Partidas</g:link>
+                                <li><g:link data-action="logout" data-url-logout="${createLink(controller:'logout')}" data-url-redirect="${createLinkTo(dir: '/')}">Salir</g:link>
                             </sec:ifLoggedIn>
                         </ul>
                     </div><!-- /.navbar-collapse -->

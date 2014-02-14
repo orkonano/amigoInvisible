@@ -8,10 +8,14 @@ modules = {
 	amigoInvisible{
 		dependsOn 'mustache'
 		defaultBundle 'common'
-		
 		resource url:'js/amigoInvisible.js'
-		
 	}
+
+    partida{
+        dependsOn 'mustache'
+        defaultBundle 'common'
+        resource url:'js/partida.js'
+    }
 	
 	mustache{
 		dependsOn 'jquery, bootstrap'
