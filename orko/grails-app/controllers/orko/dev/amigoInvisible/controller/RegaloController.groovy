@@ -16,6 +16,7 @@ class RegaloController {
         def user = springSecurityService.getCurrentUser()
         def amigoFrom = AmigoInvisible.findByUser(user)
         def regalo = Regalo.findByPartidaAndAmigoFrom(partida,amigoFrom)
-        [amigoTo:regalo.amigoTo.nombre] as JSON
+        def result =  [amigoTo:regalo.amigoTo.nombre]
+        render result as JSON
     }
 }

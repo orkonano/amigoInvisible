@@ -16,13 +16,12 @@
     <tr>
         <th>Nombre</th>
         <th>Código</th>
-        <th>A quien le regalaste?</th>
-        <th>Quiene Participaron?</th>
+        <th>A qui&eacute;n le regalaste?</th>
     </tr>
     </thead>
     <tbody>
     <g:if test="${!partidas.isEmpty()}">
-        <g:each in="${partidas}" var="partida">
+        <g:each  status="i" in="${partidas}" var="partida">
             <tr>
                 <td>
                     ${partida.name}
@@ -31,15 +30,21 @@
                     ${partida.code}
                 </td>
                 <td>
-                    <g:link data-action="aquienleregale"  data-url="${createLink(controller:'regalo',action: 'regaloPartida')}" data-id-partida="${partida.id}">Apretá acá</g:link>
-                </td>
-                <td>
+                    <span data-action="aquienleregale" data-index="${i}"  data-url="${createLink(controller:'regalo',action: 'regaloPartida')}" data-id-partida="${partida.id}" class="glyphicon glyphicon-user" id="tooltip_${i}"></span>
                 </td>
             </tr>
         </g:each>
     </g:if>
     </tbody>
 </table>
+
+
+<div  class="tooltip top">
+        <div class="tooltip-inner">
+          Some tooltip text!
+        </div>
+        <div class="tooltip-arrow"></div>
+   </div>
 
 </body>
 </html>
