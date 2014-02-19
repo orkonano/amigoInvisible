@@ -87,6 +87,7 @@ environments {
     development {
         grails.logging.jul.usebridge = true
         grails.resources.mappers.yuicssminify.disable=true
+        grails.resources.debug = true
     }
 	test{
 		grails.mail.disabled = true
