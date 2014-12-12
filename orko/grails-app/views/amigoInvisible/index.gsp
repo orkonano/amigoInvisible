@@ -3,7 +3,6 @@
 <head>
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'amigoInvisible.label', default: 'AmigoInvisible')}"/>
-    <r:require module="amigoInvisible" />
 </head>
 
 <body>

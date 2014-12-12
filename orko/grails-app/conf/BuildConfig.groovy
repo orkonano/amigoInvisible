@@ -49,37 +49,37 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-         runtime 'mysql:mysql-connector-java:5.1.24'
-		 runtime 'javax.mail:mail:1.4'
-		 compile('org.springframework.integration:spring-integration-core:3.0.1.RELEASE'){
-			 excludes "spring-aop", "spring-beans", "spring-context", "spring-context-support", "spring-core", "spring-tx"
-		 }
-		 compile('org.springframework.integration:spring-integration-mail:3.0.1.RELEASE'){
-			 excludes "spring-aop", "spring-beans", "spring-context", "spring-context-support", "spring-core", "spring-tx"
-		 }
+        compile('org.springframework.integration:spring-integration-core:4.0.4.RELEASE'){
+            excludes "spring-aop", "spring-beans", "spring-context", "spring-context-support", "spring-core", "spring-tx"
+        }
+
+        compile('org.springframework.integration:spring-integration-mail:4.0.4.RELEASE'){
+            excludes "spring-aop", "spring-beans", "spring-context", "spring-context-support", "spring-core", "spring-tx"
+        }
+
+        runtime 'mysql:mysql-connector-java:5.1.29'
+        runtime 'javax.mail:mail:1.4'
+        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+        test "cglib:cglib-nodep:3.1"
 
     }
 
     plugins {
-        // plugins for the build system only
-        build ":tomcat:7.0.47"
-
+        build ":tomcat:7.0.55"
         // plugins for the compile step
-        compile ":scaffolding:2.0.1"
-        compile ':cache:1.1.1'
-        compile ':spring-security-core:2.0-RC2'
+        compile ":scaffolding:2.1.2"
+        compile ':cache:1.1.7'
+        compile ":asset-pipeline:2.0.19"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate:3.6.10.4" // or ":hibernate4:4.1.11.4"
-        runtime ":database-migration:1.3.8"
-        runtime ":jquery:1.10.2.2"
-        runtime ":resources:1.2.1"
-		runtime ":twitter-bootstrap:3.0.2"
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        runtime ":zipped-resources:1.0.1"
-        runtime ":cached-resources:1.0"
-		runtime ":cache-headers:1.1.5"
-        runtime ":yui-minify-resources:0.1.5"
+        runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
+        runtime ":database-migration:1.4.1-SNAPSHOT"
+        runtime ":jquery:1.11.1"
+        compile ":spring-security-core:2.0-RC4"
+        runtime ':twitter-bootstrap:3.3.1'
+
+        runtime ":jquery:1.11.1"
+
     }
 }

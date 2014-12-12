@@ -82,6 +82,11 @@ grails.exceptionresolver.params.exclude = ['password']
 
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
+// configure passing transaction's read-only attribute to Hibernate session, queries and criterias
+// set "singleSession = false" OSIV mode in hibernate configuration after enabling
+grails.hibernate.pass.readonly = false
+// configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
+grails.hibernate.osiv.readonly = false
 
 environments {
     development {
@@ -117,9 +122,9 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
-	info 'org.springframework','org.hibernate'
+	/*info 'org.springframework','org.hibernate'
     info 'grails.plugin.springsecurity.web.filter.DebugFilter'
-	debug 'org.springframework.integration','org.hibernate'
+	debug 'org.springframework.integration','org.hibernate'*/
 }
 
 grails {
@@ -143,7 +148,6 @@ grails {
 	}
  }
 
-grails.plugins.twitterbootstrap.defaultBundle = 'common'
 
 
 // Added by the Spring Security Core plugin:

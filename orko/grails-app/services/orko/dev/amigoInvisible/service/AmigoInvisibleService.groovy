@@ -1,7 +1,6 @@
 package orko.dev.amigoInvisible.service
 
 import grails.transaction.Transactional
-import org.apache.commons.collections.CollectionUtils
 import orko.dev.amigoInvisible.domain.AmigoInvisible
 import orko.dev.amigoInvisible.domain.Partida
 import orko.dev.amigoInvisible.domain.Regalo
@@ -18,7 +17,7 @@ class AmigoInvisibleService {
 		List<Regalo> regalos = new ArrayList()
 		def index
 		Random random = new Random()
-		while(CollectionUtils.isNotEmpty(amigosTo)){
+		while(amigosTo){
             index = random.nextInt(amigosFrom.size())
 			AmigoInvisible amigoTo = amigosTo.get(0)
             AmigoInvisible amigoFrom = amigosFrom.get(index)
@@ -35,7 +34,7 @@ class AmigoInvisibleService {
     }
 
     def Partida saveAmigoInvisible(Partida partida){
-        List participantes = new ArrayList<AmigoInvisible>(partida.participantes)
+        List<AmigoInvisible> participantes = new ArrayList<AmigoInvisible>(partida.participantes)
         partida.participantes.clear()
         for (amigo in participantes){
             def nombreAux = amigo.nombre

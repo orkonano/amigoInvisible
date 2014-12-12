@@ -1,8 +1,8 @@
 package orko.dev.amigoInvisible.controller
 
 import grails.plugin.springsecurity.annotation.Secured
-import org.springframework.integration.Message
 import org.springframework.integration.support.MessageBuilder
+import org.springframework.messaging.Message
 import orko.dev.amigoInvisible.command.AmigoInvisibleCommand
 import orko.dev.amigoInvisible.domain.Partida
 

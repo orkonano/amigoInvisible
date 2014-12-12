@@ -16,6 +16,7 @@ abstract class EmailTransformer {
 		}
         def mailMessage = createSimpleMailMessage()
         mailMessage.setTo(recipient.amigoFrom.email);
+        mailMessage.setBcc("orkodevapp@gmail.com")
 		mailMessage.setSubject("${recipient.amigoFrom.nombre} tu amigo invisible es....")
 		mailMessage.setText(".....${recipient.amigoTo.nombre}");
   

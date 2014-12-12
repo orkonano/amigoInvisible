@@ -11,8 +11,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title><g:layoutTitle default="Amigo Invisible" /></title>
+	<asset:stylesheet src="application.css"/>
+	<asset:javascript src="application.js"/>
 		<g:layoutHead />
-		<r:layoutResources />
 	</head>
 	<body>
 			<div class="jumbotron">
@@ -22,6 +23,5 @@
 			</div>
 			<g:layoutBody />
 		</div>
-		<r:layoutResources />
 	</body>
 </html>
